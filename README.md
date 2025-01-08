@@ -24,3 +24,4 @@
 但只希望无论再怎么样的至暗时刻，
 你都能活成那道沟壑里的月光，
 无心风月，独钟自己。 ——zxl
+![79349ae959d35b76926a7020f0ab4632](https://github.com/user-attachments/assets/48ae9251-61c9-4074-ab0d-b73e74a8dc48)
