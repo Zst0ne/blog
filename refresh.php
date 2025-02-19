@@ -1,4 +1,6 @@
 <?php
+require_once './include/Parsedown.php';
+require_once './include/ParsedownExtra.php';
 // 定义一个递归函数来统计文件数量
 function countFilesInDirectory($directory) {
     // 初始化文件计数器
@@ -78,11 +80,13 @@ try {
 				#preview	
 				if(empty($preview))
 					$preview="undefined";
+				$parsedown = new ParsedownExtra();
+				$preview = $parsedown->text($preview);
+				$preview=strip_tags($preview);
+				$preview=htmlspecialchars($preview, ENT_QUOTES, 'UTF-8');
+				$preview=substr($preview,0,256);
+				$preview = iconv('UTF-8', 'UTF-8//IGNORE',$preview);
 				
-				$preview=addslashes($preview);
-				$preview=substr($preview,0,28);
-				
-
 				$text= <<<EOF
 									{
 									title: "{$title}",
