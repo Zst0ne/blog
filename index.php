@@ -44,11 +44,11 @@ require_once('refresh.php');
                     <div class="text-sm text-gray-500">文章</div>
                   </div>
                   <div class="text-center">
-                    <div class="text-lg font-bold"><?php $totalFiles; ?></div>
+                    <div class="text-lg font-bold"><?php echo count($totaltags); ?></div>
                     <div class="text-sm text-gray-500">标签</div>
                   </div>
                   <div class="text-center">
-                    <div class="text-lg font-bold"><?php ?></div>
+                    <div class="text-lg font-bold"><?php echo $totalFiles; ?></div>
                     <div class="text-sm text-gray-500">分类</div>
                   </div>
                 </div>
@@ -64,34 +64,39 @@ require_once('refresh.php');
     </div>
 
     <script>
-<?php echo $articles;?>
-      function createArticleElement(article) {
-        return `
-                      <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
-                          <div class="flex items-center space-x-2 text-sm text-gray-500">
-                              <span>${article.date}</span>
-                              <span>·</span>
-                              <span class="text-primary">${article.category}</span>
-                          </div>
-                          <h3 class="text-xl font-bold mt-2 hover:text-primary cursor-pointer">${article.title}</h3>
-                          <div class="mt-2 text-sm text-gray-600">${article.preview}</div>
-                          <div class="flex space-x-2 mt-4">
-                              ${article.tags
-                                .map(
-                                  (tag) => `
-                                  <span class="px-2 py-1 bg-blue-50 text-primary text-sm rounded-full">${tag}</span>
-                              `,
-                                )
-                                .join("")}
-                          </div>
-                      </div>
-                  `;
-      }
+<?php echo $articles; ?>
+function createArticleElement(article) {
+    // 假设博客的URL是基于标题生成的
+    <?php echo $ts; ?>
 
-      const articleList = document.getElementById("articleList");
-      articles.forEach((article) => {
-        articleList.innerHTML += createArticleElement(article);
-      });
+    return `
+        <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
+            <div class="flex items-center space-x-2 text-sm text-gray-500">
+                <span>${article.date}</span>
+                <span>·</span>
+                <span class="text-primary">${article.category}</span>
+            </div>
+            <h3 class="text-xl font-bold mt-2 hover:text-primary cursor-pointer">
+                <a href="${blogUrl}">${article.title}</a>
+            </h3>
+            <div class="mt-2 text-sm text-gray-600">${article.preview}</div>
+            <div class="flex space-x-2 mt-4">
+                ${article.tags
+                    .map(
+                        (tag) => `
+                        <span class="px-2 py-1 bg-blue-50 text-primary text-sm rounded-full">${tag}</span>
+                    `,
+                    )
+                    .join("")}
+            </div>
+        </div>
+    `;
+}
+
+const articleList = document.getElementById("articleList");
+articles.forEach((article) => {
+    articleList.innerHTML += createArticleElement(article);
+});
     </script>
 	
 
