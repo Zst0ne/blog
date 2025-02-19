@@ -1,13 +1,101 @@
 <?php
-
+$TITLE = 'Stone';
 $NAME = "Stone's Blog"; // 页面标题
-$DEFAULT = '<meta name="author" content="Stone">
-            <meta name="copyright" content="Stone">
-            <meta name="format-detection" content="telephone=no">
-            <meta name="theme-color" content="#ffffff">'; // 默认的meta标签
-$HEAD = '<link rel="stylesheet" href="/css/index.css?v=4.13.0">
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
-         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media=\'all\'">'; // 头部引入的CSS和JS
+$STYLE = <<<EOF
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="/css/index.css?v=4.13.0">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media=\'all\'">
+EOF;
+
+$DEFAULT = <<<EOF
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+EOF; // 默认的meta标签
+
+$HEAD = <<<EOF
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3B82F6",
+              secondary: "#6B7280",
+            },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      .article-list::-webkit-scrollbar {display: none;}
+    </style>
+EOF;
+$SOCIAL = <<<EOF
+            <button
+              class="w-full bg-primary text-white py-2 rounded-button mt-4 !rounded-button hover:bg-primary/90 transition-colors">
+              加入我的KOOK频道
+            </button>
+            <div class="flex justify-center space-x-4 mt-4">
+              <div class="w-8 h-8 flex items-center justify-center">
+                <i
+                  class="ri-notification-3-line text-xl text-gray-600 hover:text-primary cursor-pointer"
+                ></i>
+              </div>
+              <div class="w-8 h-8 flex items-center justify-center">
+                <i
+                  class="ri-github-line text-xl text-gray-600 hover:text-primary cursor-pointer"
+                ></i>
+              </div>
+              <div class="w-8 h-8 flex items-center justify-center">
+                <i
+                  class="ri-calendar-line text-xl text-gray-600 hover:text-primary cursor-pointer"
+                ></i>
+              </div>
+            </div>
+          </div>
+EOF;
+
+$ANNOUNCEMENT = <<<EOF
+          <div class="bg-white rounded-lg p-6 shadow-sm">
+            <div class="flex items-center space-x-2 text-red-500">
+              <i class="ri-megaphone-line text-lg"></i>
+              <span class="font-bold">公告</span>
+            </div>
+            <div class="mt-4 text-sm text-gray-600 space-y-2">
+              <p>Welcome! 友链、合作请联系我。</p>
+              <p>诚邀各路大佬在此打赏自己的文章。</p>
+              <p>欢迎加入我的QQ群：53344657</p>
+            </div>
+          </div>
+EOF;
+
+$LIVE2D = <<<EOF
+			<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script>
+			<script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script>
+EOF;
+
 $TOP = '<div id="web_bg"></div>
         <div id="sidebar">
             <div id="menu-mask"></div>
