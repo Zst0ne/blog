@@ -22,8 +22,7 @@ function countFilesInDirectory($directory) {
     }
     return $fileCount;
 }
-
-
+$date=date('Y-m-d');	
 
 // 定义Public目录的路径
 $publicDirectory = 'Public';
@@ -33,6 +32,7 @@ $directoryPath = './source/_posts';
 try {
     $dir = new DirectoryIterator($directoryPath);
     foreach ($dir as $fileInfo) {
+		$tags="";
         if ($fileInfo->isDot()) {
             continue;
         }
@@ -46,34 +46,44 @@ try {
             if ($content !== false) {
                 // 使用正则表达式提取 title, tags, categories
                 preg_match('/title:\s*(.*)/', $content, $titleMatches);
-                preg_match('/tags:\s*(.*)/', $content, $tagsMatches);
-                preg_match('/categories:\s*(.*)/', $content, $categoriesMatches);
-
-                var_dump($titleMatches);                
-				var_dump($tagsMatches);
-				var_dump($categoriesMatches);
-				
-                // 提取 title
-                $title = isset($titleMatches[1]) ? trim($titleMatches[1]) : '';
-                // 提取 tags
-                $tags = isset($tagsMatches[1]) ? array_map('trim', explode(',', $tagsMatches[1])) : [];
-                // 提取 categories
-                $categories = isset($categoriesMatches[1]) ? array_map('trim', explode(',', $categoriesMatches[1])) : [];
-			
-                echo "标题：<br>";
-                var_dump($title);
-                echo "标签：<br>";
-                var_dump($tags);
-                echo "分类：<br>";
-                var_dump($categories);
-
+                $pattern = '/' . preg_quote('tags:', '/') . '(.*?)' . preg_quote('categories:', '/') . '/s';
+                if (preg_match($pattern,$content,$matches)) {
+					$element = explode(" - ", $matches[1]);
+					while (!empty($element)) {
+							$tags=array_pop($element).'","'.$tags;
+					}
+                } else {
+					#echo("");
+                }
+				preg_match('/categories:\s*(.*)/', $content, $categoriesMatches);
+				$category=$categoriesMatches[1];
+				$title = isset($titleMatches[1]) ? trim($titleMatches[1]) : '';
+				$title=htmlspecialchars($title);
+				$tags=substr($tags,5,-3);
+				$tags = str_replace(["\n", "\r", " "], "", $tags);
+				$text= <<<EOF
+									{
+									title: "{$title}",
+									date: "{$date}",
+									category: "{$category}",
+									tags: ["{$tags}"],
+									preview:"{$preview}",
+									},
+								EOF;
             } else {
                 echo "读取文件 {$filePath} 时发生错误。<br>";
                 continue;
             }
         }
+
+$array=$array.$text;
+$articles= <<<EOF
+	const articles = [{$array}];
+EOF;
     }
 } catch (UnexpectedValueException $e) {
     echo "目录访问出错: ". $e->getMessage();
 }
+
+
 ?>
