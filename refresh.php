@@ -53,14 +53,36 @@ try {
 							$tags=array_pop($element).'","'.$tags;
 					}
                 } else {
-					#echo("");
+					 # echo "未找到 'Tags' 后面的内容。";
                 }
+				if (preg_match('/---\s*(.*)/', $content, $matches)) {
+				    // 输出提取到的内容
+					$preview=$matches[1];
+				} else {
+				    // 如果没有匹配到，输出提示信息
+				    # echo "未找到 '---' 后面的内容。";
+				}
 				preg_match('/categories:\s*(.*)/', $content, $categoriesMatches);
 				$category=$categoriesMatches[1];
+				#title
 				$title = isset($titleMatches[1]) ? trim($titleMatches[1]) : '';
 				$title=htmlspecialchars($title);
-				$tags=substr($tags,5,-3);
+				
+				#tags
+
+				$tags = substr($tags,5,-3);
 				$tags = str_replace(["\n", "\r", " "], "", $tags);
+				if(empty($tags))
+					$tags="undefined";
+					
+				#preview	
+				if(empty($preview))
+					$preview="undefined";
+				
+				$preview=addslashes($preview);
+				$preview=substr($preview,0,28);
+				
+
 				$text= <<<EOF
 									{
 									title: "{$title}",
