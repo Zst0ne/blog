@@ -11,6 +11,8 @@ require_once('refresh.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $NAME; ?></title>
 	
+
+	
 	<?php echo $HEAD; ?>
 	
   </head>
@@ -64,7 +66,7 @@ require_once('refresh.php');
     </div>
 
     <script>
-<?php echo $articles; ?>
+		<?php echo $articles; ?>
         function createArticleElement(article) {
             return `
                 <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -83,7 +85,6 @@ require_once('refresh.php');
                 </div>
             `;
         }
-
 
 const articleList = document.getElementById("articleList");
 articles.forEach((article) => {
