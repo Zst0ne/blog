@@ -74,10 +74,8 @@ try {
 				$category=$categoriesMatches[1];
 				#title
 				$title = isset($titleMatches[1]) ? trim($titleMatches[1]) : '';
-				$title=htmlspecialchars($title);
-				
+				$title=htmlspecialchars($title);				
 				#tags
-
 				$tags = substr($tags,5,-3);
 				$tags = str_replace(["\n", "\r", " "], "", $tags);
 				if(empty($tags))
@@ -93,10 +91,19 @@ try {
 				$preview=substr($preview,0,256);
 				$preview = iconv('UTF-8', 'UTF-8//IGNORE',$preview);
 				
-				
+				#Url				
 				#const blogUrl = `/blog/${encodeURIComponent(article.title)}`;
 				$blogUrl = $publicDirectory.'/'.$fileInfo->getFilename();
-				$var_blog[]=$blogUrl;
+				$url=$blogUrl;
+				$pos = strrpos($url, '.md');
+				if ($pos!== false) {
+				    // 将.md替换为.php
+				    $url = substr_replace($url, '.php', $pos, 3);
+				} else {
+				    #echo "未找到.md，无法替换";
+				}
+				
+				
 				$text= <<<EOF
 									{
 									title: "{$title}",
@@ -104,6 +111,7 @@ try {
 									category: "{$category}",
 									tags: ["{$tags}"],
 									preview:"{$preview}",
+									url:"${url}"
 									},
 								EOF;
             } else {
@@ -119,8 +127,5 @@ EOF;
 } catch (UnexpectedValueException $e) {
     echo "目录访问出错: ". $e->getMessage();
 }
-var_dump($var_blog);
-
-
 
 ?>
