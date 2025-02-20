@@ -186,7 +186,6 @@ $BOTTOM = '<footer id="footer">
         <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script>
         <div class="js-pjax"></div>
         <script> document.getElementsByClassName("copyright")[0].innerHTML = "©2024 By Stone 萌ICP备20250074号"; </script>
-        <div class="aplayer no-destroy" data-id="464916877" data-server="netease" data-type="song" data-fixed="true" data-autoplay=""> </div>
         <script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="false" data-text="F,A,Q" data-fontsize="15px" data-random="false" async="async"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media=\'all\'">
         <script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
@@ -194,4 +193,10 @@ $BOTTOM = '<footer id="footer">
         <script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
         <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script>
         <script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script>'; // 页面底部内容
+
+$MUSIC = <<<EOF
+<div class="aplayer no-destroy" data-id="464916877" data-server="netease" data-type="song" data-fixed="true" data-autoplay=""> </div>
+EOF;
+
 ?>
+

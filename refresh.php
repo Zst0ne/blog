@@ -29,6 +29,8 @@ $date=date('Y-m-d');
 // 定义Public目录的路径
 $publicDirectory = 'Public';
 $totalFiles = countFilesInDirectory($publicDirectory);
+$totaltags = [];
+
 $directoryPath = './source/_posts';
 
 try {
@@ -52,7 +54,11 @@ try {
                 if (preg_match($pattern,$content,$matches)) {
 					$element = explode(" - ", $matches[1]);
 					while (!empty($element)) {
-							$tags=array_pop($element).'","'.$tags;
+							$r=array_pop($element);
+							$tags=$r.'","'.$tags;
+							if (!in_array($r,$totaltags )) {
+							    $totaltags[]=$r;
+							}
 					}
                 } else {
 					 # echo "未找到 'Tags' 后面的内容。";
@@ -87,6 +93,10 @@ try {
 				$preview=substr($preview,0,256);
 				$preview = iconv('UTF-8', 'UTF-8//IGNORE',$preview);
 				
+				
+				#const blogUrl = `/blog/${encodeURIComponent(article.title)}`;
+				$blogUrl = $publicDirectory.'/'.$fileInfo->getFilename();
+				$var_blog[]=$blogUrl;
 				$text= <<<EOF
 									{
 									title: "{$title}",
@@ -101,7 +111,6 @@ try {
                 continue;
             }
         }
-
 $array=$array.$text;
 $articles= <<<EOF
 	const articles = [{$array}];
@@ -110,6 +119,8 @@ EOF;
 } catch (UnexpectedValueException $e) {
     echo "目录访问出错: ". $e->getMessage();
 }
+var_dump($var_blog);
+
 
 
 ?>

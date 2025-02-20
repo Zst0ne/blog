@@ -32,7 +32,7 @@ require_once('refresh.php');
           <div class="bg-white rounded-lg p-6 shadow-sm">
             <div class="flex items-center space-x-4">
               <img
-                src="https://public.readdy.ai/ai/img_res/e97754b0223c28f27a7267b32f16d201.jpg"
+                src="./img/head2.jpg"
                 class="w-16 h-16 rounded-full object-cover"
                 alt="avatar"
               />
@@ -67,8 +67,6 @@ require_once('refresh.php');
 <?php echo $articles; ?>
 function createArticleElement(article) {
     // 假设博客的URL是基于标题生成的
-    <?php echo $ts; ?>
-
     return `
         <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">
             <div class="flex items-center space-x-2 text-sm text-gray-500">
@@ -92,13 +90,14 @@ function createArticleElement(article) {
         </div>
     `;
 }
-
+var i = 0;
 const articleList = document.getElementById("articleList");
+const blogUrls = <?php echo json_encode($var_blog); ?>;
 articles.forEach((article) => {
+	var blogUrl = blogUrls[i++];
     articleList.innerHTML += createArticleElement(article);
 });
     </script>
-	
-
+	<?php echo $MUSIC; ?>
   </body>
 </html>
