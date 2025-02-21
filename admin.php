@@ -26,6 +26,23 @@
 </body>
 </html>
 <?php
+$_path = <<<'EOF'
+<?php
+$currentDir = getcwd();
+# echo "当前工作目录: ". $currentDir. "\n";
+// 切换到上一级目录
+$parentDir = dirname($currentDir);
+if (chdir($parentDir)) {
+    // 获取切换后的工作目录
+    $newDir = getcwd();
+    require_once('config.php');
+    require_once('refresh.php');
+} else {
+    echo "切换目录失败\n";
+}
+?>
+EOF;
+
 // 加载 Parsedown 和 页面渲染框架
 require_once './config.php';
 require_once './include/Parsedown.php';
@@ -34,18 +51,34 @@ require_once './include/ParsedownExtra.php';
 
 $HTML= <<<EOF
 <!DOCTYPE html>
-<html lang="en">
-<head>
-{$HEAD}
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="zh">
+  <head>
+	{$STYLES} {$DEFAULT}
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{$NAME}</title>
-</head>
-<body>
-{$TOP}
-{$BOTTOM}
-</body>
+	
+			{$HEAD}
+	
+  </head>
+			{$bodydiv}
+		  	{$SOCIAL}
+			{$ANNOUNCEMENT}
+			{$LIVE2D}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+    </script>
+	{$MUSIC}
+	{$TEXT}
+  </body>
 </html>
 EOF;
+
+
 
 ?>
 
@@ -54,7 +87,7 @@ EOF;
 	header('Content-type:text/html; charset=utf-8');
 	// 开启Session
 	session_start();
- 
+
 	// 处理用户登录信息
 	if (isset($_POST['login'])) {
 		# 接收用户的登录信息
@@ -94,6 +127,7 @@ EOF;
 <?php
 
 if ($_SESSION['username'] === $username && $_SESSION['islogin'] === 1) {
+	$data="";
 	echo("登录成功！");
     // 登录成功，跳转到欢迎页面
 	// 创建 ParsedownExtra 实例
@@ -116,9 +150,9 @@ if ($_SESSION['username'] === $username && $_SESSION['islogin'] === 1) {
 		            $filePath = $fileInfo->getPathname();
 		            $content = file_get_contents($filePath);
 		            if ($content!== false && $fileInfo->isFile() && pathinfo($filePath, PATHINFO_EXTENSION) === 'md') {
-		                $data = $parsedown->text($content);
-		                $data = "<?php header('Content-Type: text/html; charset=utf-8'); ?>".$data;  #定义文本编码
-		                $data = "<br></br>".$data;  #定义文本编码
+		                $markdown = $parsedown->text($content);
+		                $data = $_path."<?php header('Content-Type: text/html; charset=utf-8'); ?>";  #定$义文本编码
+		                $data = "".$data.$HTML.'<script> document.getElementsByClassName("text")[0].innerHTML = "'.addslashes($markdown).'"; </script>';  #定义文本编码
 		                // 生成输出文件路径
 		                $outputDir = './public';
 		                if (!is_dir($outputDir)) {

@@ -230,7 +230,7 @@ $MUSIC = <<<EOF
     ap.init();
 </script>
 EOF;
-$bodydiv=<<<EOF
+$bodydiv=<<<'EOF'
 			  <body class="bg-gray-50">
 			    <div class="max-w-7xl mx-auto px-4 py-8">
 			      <div class="grid grid-cols-12 gap-8">
