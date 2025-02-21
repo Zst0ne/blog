@@ -57,28 +57,27 @@ $HEAD = <<<EOF
     </style>
 EOF;
 $SOCIAL = <<<EOF
-            <button
-              class="w-full bg-primary text-white py-2 rounded-button mt-4 !rounded-button hover:bg-primary/90 transition-colors">
-              加入我的KOOK频道
-            </button>
-            <div class="flex justify-center space-x-4 mt-4">
-              <div class="w-8 h-8 flex items-center justify-center">
-                <i
-                  class="ri-notification-3-line text-xl text-gray-600 hover:text-primary cursor-pointer"
-                ></i>
-              </div>
-              <div class="w-8 h-8 flex items-center justify-center">
-                <i
-                  class="ri-github-line text-xl text-gray-600 hover:text-primary cursor-pointer"
-                ></i>
-              </div>
-              <div class="w-8 h-8 flex items-center justify-center">
-                <i
-                  class="ri-calendar-line text-xl text-gray-600 hover:text-primary cursor-pointer"
-                ></i>
-              </div>
-            </div>
-          </div>
+<button class="w-full bg-primary text-white py-2 rounded-button mt-4 !rounded-button hover:bg-primary/90 transition-colors">
+  关注我的抖音账号
+</button>
+<div class="flex justify-center space-x-4 mt-4">
+  <div class="w-8 h-8 flex items-center justify-center">
+    <a href="https://example.com/notification" target="_blank"> <!-- 替换为实际的通知链接 -->
+      <i class="ri-notification-3-line text-xl text-gray-600 hover:text-primary cursor-pointer"></i>
+    </a>
+  </div>
+  <div class="w-8 h-8 flex items-center justify-center">
+    <a href="https://github.com/Zst0NE/blog" target="_blank"> <!-- 替换为实际的GitHub链接 -->
+      <i class="ri-github-line text-xl text-gray-600 hover:text-primary cursor-pointer"></i>
+    </a>
+  </div>
+  <div class="w-8 h-8 flex items-center justify-center">
+    <a href="https://example.com/calendar" target="_blank"> <!-- 替换为实际的日历链接 -->
+      <i class="ri-calendar-line text-xl text-gray-600 hover:text-primary cursor-pointer"></i>
+    </a>
+  </div>
+</div>
+</div>
 EOF;
 
 $ANNOUNCEMENT = <<<EOF
