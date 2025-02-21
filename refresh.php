@@ -103,7 +103,6 @@ try {
 				    #echo "未找到.md，无法替换";
 				}
 				
-				
 				$text= <<<EOF
 									{
 									title: "{$title}",

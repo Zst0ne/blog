@@ -16,7 +16,6 @@ require_once('refresh.php');
 	<?php echo $HEAD; ?>
 	
   </head>
-  
   <body class="bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 py-8">
       <div class="grid grid-cols-12 gap-8">
@@ -66,7 +65,7 @@ require_once('refresh.php');
     </div>
 
     <script>
-		<?php echo $articles; ?>
+		  <?php echo $articles; ?>
         function createArticleElement(article) {
             return `
                 <div class="bg-white rounded-lg p-6 shadow-sm hover:shadow-md transition-shadow">

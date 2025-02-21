@@ -230,6 +230,46 @@ $MUSIC = <<<EOF
     ap.init();
 </script>
 EOF;
-
+$bodydiv=<<<EOF
+			  <body class="bg-gray-50">
+			    <div class="max-w-7xl mx-auto px-4 py-8">
+			      <div class="grid grid-cols-12 gap-8">
+			        <div class="col-span-8">
+			          <div class="space-y-6">
+			            <div
+			              id="articleList"
+			              class="space-y-6 article-list overflow-y-auto"
+			              style="max-height: calc(100vh - 2rem);"
+			            ></div>
+			          </div>
+			        </div>
+			
+			        <div class="col-span-4 space-y-6">
+			          <div class="bg-white rounded-lg p-6 shadow-sm">
+			            <div class="flex items-center space-x-4">
+			              <img
+			                src="../img/head2.jpg"
+			                class="w-16 h-16 rounded-full object-cover"
+			                alt="avatar"
+			              />
+			              <div>
+			                <h2 class="text-xl font-bold">Stone</h2>
+			                <div class="flex space-x-6 mt-2">
+			                  <div class="text-center">
+			                    <div class="text-lg font-bold"><?php echo $totalFiles; ?></div>
+			                    <div class="text-sm text-gray-500">文章</div>
+			                  </div>
+			                  <div class="text-center">
+			                    <div class="text-lg font-bold"><?php echo count($totaltags); ?></div>
+			                    <div class="text-sm text-gray-500">标签</div>
+			                  </div>
+			                  <div class="text-center">
+			                    <div class="text-lg font-bold"><?php echo $totalFiles; ?></div>
+			                    <div class="text-sm text-gray-500">分类</div>
+			                  </div>
+			                </div>
+			              </div>
+			            </div>
+EOF;
 ?>
 
