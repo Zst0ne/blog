@@ -48,39 +48,8 @@ require_once './config.php';
 require_once './include/Parsedown.php';
 require_once './include/ParsedownExtra.php';
 #$NAME="Noobspace";$TAG="";$CATEGORIES="";$USERS="";$DEFAULT= <<<EOF
-
-$HTML= <<<EOF
-<!DOCTYPE html>
-<html lang="zh">
-  <head>
-	{$STYLES} {$DEFAULT}
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{$NAME}</title>
-	
-			{$HEAD}
-	
-  </head>
-			{$bodydiv}
-		  	{$SOCIAL}
-			{$ANNOUNCEMENT}
-			{$LIVE2D}
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <script>
-    </script>
-	{$MUSIC}
-	{$TEXT}
-  </body>
-</html>
-EOF;
-
-
-
 ?>
+
 
 
 <?php 
@@ -125,7 +94,6 @@ EOF;
 
 
 <?php
-
 if ($_SESSION['username'] === $username && $_SESSION['islogin'] === 1) {
 	$data="";
 	echo("登录成功！");
@@ -151,8 +119,53 @@ if ($_SESSION['username'] === $username && $_SESSION['islogin'] === 1) {
 		            $content = file_get_contents($filePath);
 		            if ($content!== false && $fileInfo->isFile() && pathinfo($filePath, PATHINFO_EXTENSION) === 'md') {
 		                $markdown = $parsedown->text($content);
-		                $data = $_path."<?php header('Content-Type: text/html; charset=utf-8'); ?>";  #定$义文本编码
-		                $data = "".$data.$HTML.'<script> document.getElementsByClassName("text")[0].innerHTML = "'.addslashes($markdown).'"; </script>';  #定义文本编码
+						$divtext=<<<EOF
+							 <body class="bg-gray-50">
+								<div class="max-w-7xl mx-auto px-4 py-8">
+									 <div class="grid grid-cols-12 gap-8">
+										<div class="col-span-8">{$markdown}
+															          <div class="space-y-6">
+															            <div
+															              id="articleList"
+															              class="space-y-6 article-list overflow-y-auto"
+															              style="max-height: calc(100vh - 2rem);"
+															            ></div>
+															          </div>
+															        </div>
+						EOF;
+						$HTML= <<<EOF
+						<!DOCTYPE html>
+						<html lang="zh">
+						  <head>
+							{$STYLES} {$DEFAULT}
+						    <meta charset="UTF-8" />
+						    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+						    <title>{$NAME}</title>
+							
+									{$HEAD}
+							
+						  </head>
+									{$divtext}
+									{$bodydiv}
+								  	{$SOCIAL}
+									{$ANNOUNCEMENT}
+									{$LIVE2D}
+						          </div>
+						        </div>
+						      </div>
+						    </div>
+						
+						    <script>
+						    </script>
+							{$MUSIC}
+						  </body>
+						</html>
+						EOF;
+
+		                $data = $_path."<?php header('Content-Type: text/html; charset=utf-8'); ?>";  #定义文本编码
+		                $data = "".$data.$HTML;  #定义文本编码
+							
+				
 		                // 生成输出文件路径
 		                $outputDir = './public';
 		                if (!is_dir($outputDir)) {

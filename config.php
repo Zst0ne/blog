@@ -230,20 +230,8 @@ $MUSIC = <<<EOF
     ap.init();
 </script>
 EOF;
+
 $bodydiv=<<<'EOF'
-			  <body class="bg-gray-50">
-			    <div class="max-w-7xl mx-auto px-4 py-8">
-			      <div class="grid grid-cols-12 gap-8">
-			        <div class="col-span-8">
-			          <div class="space-y-6">
-			            <div
-			              id="articleList"
-			              class="space-y-6 article-list overflow-y-auto"
-			              style="max-height: calc(100vh - 2rem);"
-			            ></div>
-			          </div>
-			        </div>
-			
 			        <div class="col-span-4 space-y-6">
 			          <div class="bg-white rounded-lg p-6 shadow-sm">
 			            <div class="flex items-center space-x-4">
@@ -271,5 +259,6 @@ $bodydiv=<<<'EOF'
 			              </div>
 			            </div>
 EOF;
+
 ?>
 

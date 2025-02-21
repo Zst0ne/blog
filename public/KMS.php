@@ -59,20 +59,31 @@ if (chdir($parentDir)) {
     </style>
 	
   </head>
-						  <body class="bg-gray-50">
-			    <div class="max-w-7xl mx-auto px-4 py-8">
-			      <div class="grid grid-cols-12 gap-8">
-			        <div class="col-span-8">
-			          <div class="space-y-6">
-			            <div
-			              id="articleList"
-			              class="space-y-6 article-list overflow-y-auto"
-			              style="max-height: calc(100vh - 2rem);"
-			            ></div>
-			          </div>
-			        </div>
-			
-			        <div class="col-span-4 space-y-6">
+				 <body class="bg-gray-50">
+		<div class="max-w-7xl mx-auto px-4 py-8">
+			 <div class="grid grid-cols-12 gap-8">
+				<div class="col-span-8"><hr />
+<h2>title: 【超简单&amp;开源】最新Windows/Office激活方法
+date: 2024-05-22 12:57:34
+tags:</h2>
+<p>该方法仅支持Windows 8/10/11 Server12以上系统。<BR>
+首先Win+S 在搜索框中以管理员权限启动Powershell<BR></p>
+<pre><code>irm https://massgrave.dev/get | iex</code></pre>
+<p>如果在较旧的 Windows 版本上，您可能需要先运行以下命令：</p>
+<p><code>[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12</code>
+Powershell 方法在 Windows 7 上不起作用。请改用方法 2 - 繁体。
+URL get.activated.win 可能会被某些 DNS 服务阻止，因为它是一个新域。</p>
+<p><img src="../img/KMS.png" alt="KMS" /></p>
+<p>如图 即进入激活工具，按照指示通过数字键选择激活的模块和模式即可。</p>
+									          <div class="space-y-6">
+									            <div
+									              id="articleList"
+									              class="space-y-6 article-list overflow-y-auto"
+									              style="max-height: calc(100vh - 2rem);"
+									            ></div>
+									          </div>
+									        </div>
+						        <div class="col-span-4 space-y-6">
 			          <div class="bg-white rounded-lg p-6 shadow-sm">
 			            <div class="flex items-center space-x-4">
 			              <img
@@ -170,18 +181,5 @@ if (chdir($parentDir)) {
     });
     ap.init();
 </script>
-	
   </body>
-</html><script> document.getElementsByClassName("text")[0].innerHTML = "<hr />
-<h2>title: 【超简单&amp;开源】最新Windows/Office激活方法
-date: 2024-05-22 12:57:34
-tags:</h2>
-<p>该方法仅支持Windows 8/10/11 Server12以上系统。<BR>
-首先Win+S 在搜索框中以管理员权限启动Powershell<BR></p>
-<pre><code>irm https://massgrave.dev/get | iex</code></pre>
-<p>如果在较旧的 Windows 版本上，您可能需要先运行以下命令：</p>
-<p><code>[Net.ServicePointManager]::SecurityProtocol=[Net.SecurityProtocolType]::Tls12</code>
-Powershell 方法在 Windows 7 上不起作用。请改用方法 2 - 繁体。
-URL get.activated.win 可能会被某些 DNS 服务阻止，因为它是一个新域。</p>
-<p><img src=\"../img/KMS.png\" alt=\"KMS\" /></p>
-<p>如图 即进入激活工具，按照指示通过数字键选择激活的模块和模式即可。</p>"; </script>
+</html>
