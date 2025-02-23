@@ -21,6 +21,7 @@
 	    <input type="hidden" name="loginout" value="start">
 	    <input type="submit" value="注销用户">
 	</form>
+	
 	使用教程:请将需要渲染的文件放置于路径:./source/_posts文件.
 
 </body>
@@ -118,7 +119,13 @@ if ($_SESSION['username'] === $username && $_SESSION['islogin'] === 1) {
 		            $filePath = $fileInfo->getPathname();
 		            $content = file_get_contents($filePath);
 		            if ($content!== false && $fileInfo->isFile() && pathinfo($filePath, PATHINFO_EXTENSION) === 'md') {
-		                $markdown = $parsedown->text($content);
+		                try {
+		                    $markdown = $parsedown->text($content);
+		                } catch (Error $e) {
+		                    // 记录错误并处理异常
+		                    error_log("Parsing error: " . $e->getMessage());
+		                    echo "写入文件 {$outputFilePath} 时发生错误：Markdown解析错误。<br>";
+		                }
 						$divtext=<<<EOF
 							 <body class="bg-gray-50">
 								<div class="max-w-7xl mx-auto px-4 py-8">

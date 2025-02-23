@@ -1,7 +1,11 @@
----
 title: 【超简单&开源】最新Windows/Office激活方法
-date: 2024-05-22 12:57:34
 tags:
+  - 白嫖
+  - 网络安全
+  - Windows
+categories:
+  - 原创文章
+  - 网络安全
 ---
 
 该方法仅支持Windows 8/10/11 Server12以上系统。<BR>

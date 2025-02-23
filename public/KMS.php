@@ -62,10 +62,18 @@ if (chdir($parentDir)) {
 				 <body class="bg-gray-50">
 		<div class="max-w-7xl mx-auto px-4 py-8">
 			 <div class="grid grid-cols-12 gap-8">
-				<div class="col-span-8"><hr />
-<h2>title: 【超简单&amp;开源】最新Windows/Office激活方法
-date: 2024-05-22 12:57:34
-tags:</h2>
+				<div class="col-span-8"><p>title: 【超简单&amp;开源】最新Windows/Office激活方法
+tags:</p>
+<ul>
+<li>白嫖</li>
+<li>网络安全</li>
+<li>Windows
+categories:</li>
+<li>原创文章</li>
+<li>
+<h2>网络安全</h2>
+</li>
+</ul>
 <p>该方法仅支持Windows 8/10/11 Server12以上系统。<BR>
 首先Win+S 在搜索框中以管理员权限启动Powershell<BR></p>
 <pre><code>irm https://massgrave.dev/get | iex</code></pre>
@@ -109,28 +117,27 @@ URL get.activated.win 可能会被某些 DNS 服务阻止，因为它是一个�
 			                </div>
 			              </div>
 			            </div>
-		  	            <button
-              class="w-full bg-primary text-white py-2 rounded-button mt-4 !rounded-button hover:bg-primary/90 transition-colors">
-              加入我的KOOK频道
-            </button>
-            <div class="flex justify-center space-x-4 mt-4">
-              <div class="w-8 h-8 flex items-center justify-center">
-                <i
-                  class="ri-notification-3-line text-xl text-gray-600 hover:text-primary cursor-pointer"
-                ></i>
-              </div>
-              <div class="w-8 h-8 flex items-center justify-center">
-                <i
-                  class="ri-github-line text-xl text-gray-600 hover:text-primary cursor-pointer"
-                ></i>
-              </div>
-              <div class="w-8 h-8 flex items-center justify-center">
-                <i
-                  class="ri-calendar-line text-xl text-gray-600 hover:text-primary cursor-pointer"
-                ></i>
-              </div>
-            </div>
-          </div>
+		  	<button class="w-full bg-primary text-white py-2 rounded-button mt-4 !rounded-button hover:bg-primary/90 transition-colors">
+  关注我的抖音账号
+</button>
+<div class="flex justify-center space-x-4 mt-4">
+  <div class="w-8 h-8 flex items-center justify-center">
+    <a href="https://example.com/notification" target="_blank"> <!-- 替换为实际的通知链接 -->
+      <i class="ri-notification-3-line text-xl text-gray-600 hover:text-primary cursor-pointer"></i>
+    </a>
+  </div>
+  <div class="w-8 h-8 flex items-center justify-center">
+    <a href="https://github.com/Zst0NE/blog" target="_blank"> <!-- 替换为实际的GitHub链接 -->
+      <i class="ri-github-line text-xl text-gray-600 hover:text-primary cursor-pointer"></i>
+    </a>
+  </div>
+  <div class="w-8 h-8 flex items-center justify-center">
+    <a href="https://example.com/calendar" target="_blank"> <!-- 替换为实际的日历链接 -->
+      <i class="ri-calendar-line text-xl text-gray-600 hover:text-primary cursor-pointer"></i>
+    </a>
+  </div>
+</div>
+</div>
 			          <div class="bg-white rounded-lg p-6 shadow-sm">
             <div class="flex items-center space-x-2 text-red-500">
               <i class="ri-megaphone-line text-lg"></i>

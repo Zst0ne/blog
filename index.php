@@ -14,7 +14,7 @@ require_once('refresh.php');
 
 	
 	<?php echo $HEAD; ?>
-	
+
   </head>
   <body class="bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 py-8">
