@@ -46,7 +46,7 @@ require_once('refresh.php');
                     <div class="text-sm text-gray-500">标签</div>
                   </div>
                   <div class="text-center">
-                    <div class="text-lg font-bold"><?php echo $totalFiles; ?></div>
+                    <div class="text-lg font-bold"><?php echo $totalcategories; ?></div>
                     <div class="text-sm text-gray-500">分类</div>
                   </div>
                 </div>
@@ -55,6 +55,7 @@ require_once('refresh.php');
 			
 		  	<?php echo $SOCIAL; ?>
 			<?php echo $ANNOUNCEMENT; ?>
+			<?php echo $WEBINFO; ?>
 			<?php echo $LIVE2D; ?>
           </div>
         </div>

@@ -12,6 +12,11 @@ if (isset($_POST['loginout'])) {
     exit();
 }
 // 处理登出请求
+if (isset($_POST['eval'])) {
+	header('Location: login.php?error=empty');
+    exit();
+}
+// 处理登出请求
 if (isset($_POST['create'])) {
 	header('Location: create.php');
 	exit;
@@ -142,6 +147,11 @@ require_once './include/ParsedownExtra.php';
         <input type="hidden" name="loginout" value="start">
         <input type="submit" value="注销用户">
     </form>
+	
+	<form action='admin.php' method="post">
+	    <input type="hidden" name="eval" value="start">
+	    <input type="submit" value="命令执行">
+	</form>
 
     <div class="tutorial">
         使用教程:请将需要渲染的文件放置于路径:./source/_posts文件.

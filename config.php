@@ -142,6 +142,35 @@ $ANNOUNCEMENT = <<<EOF
           </div>
 EOF;
 
+$WEBINFO = <<<EOF
+<div class="bg-white rounded-lg p-6 shadow-sm">
+    <div class="card-widget card-webinfo">
+      <div class="item-headline">
+        <i class="fas fa-chart-line"></i>
+        <span>网站资讯</span>
+      </div>
+      <div class="webinfo">
+        <div class="webinfo-item">
+          <div class="item-name">文章数目 : </div>
+          <div class="item-count">36</div>
+        </div>
+        <div class="webinfo-item">
+          <div class="item-name">本站访客数 :</div>
+          <div class="item-count" id="busuanzi_value_site_uv"> 1046</div>
+        </div>
+        <div class="webinfo-item">
+          <div class="item-name">本站总访问量 :</div>
+          <div class="item-count" id="busuanzi_value_site_pv">{}</div>
+        </div>
+        <div class="webinfo-item">
+          <div class="item-name">最后更新时间 :</div>
+          <div class="item-count" id="last-push-date" data-lastpushdate="2025-02-24T06:02:55.886Z">7 小时前</div>
+        </div>
+      </div>
+    </div>
+  </div>
+EOF;
+
 $LIVE2D = <<<EOF
 			<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script>
 			<script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script>
