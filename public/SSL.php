@@ -27,7 +27,6 @@ if (chdir($parentDir)) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Stone's Blog</title>
-	
 			    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -57,7 +56,51 @@ if (chdir($parentDir)) {
       :where([class^="ri-"])::before { content: "3c2"; }
       .article-list::-webkit-scrollbar {display: none;}
     </style>
-	
+			    <style>
+        /* 导航栏样式 */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        /* 导航链接样式 */
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            float: left;
+        }
+
+        nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* 鼠标悬停效果 */
+        nav li a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <ul>
+            <li><a href="#">首页</a></li>
+            <li><a href="links.php">友链</a></li>
+            <li><a href="other.php">其它</a></li>
+			<li><a href="login.php">登录</a></li>
+            <li><a href="about.php">关于</a></li>
+        </ul>
+    </nav>
   </head>
 				 <body class="bg-gray-50">
 		<div class="max-w-7xl mx-auto px-4 py-8">

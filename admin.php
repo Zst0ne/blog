@@ -197,9 +197,8 @@ require_once './include/ParsedownExtra.php';
 						    <meta charset="UTF-8" />
 						    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 						    <title>{$NAME}</title>
-							
 									{$HEAD}
-							
+									{$NAVIGATION}
 						  </head>
 									{$divtext}
 									{$bodydiv}
