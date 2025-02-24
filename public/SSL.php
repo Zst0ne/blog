@@ -335,7 +335,7 @@ export Ali_Secret="your_ali_secret"</code></pre>
 			              </div>
 			            </div>
 		  	<button class="w-full bg-primary text-white py-2 rounded-button mt-4 !rounded-button hover:bg-primary/90 transition-colors">
-  关注我的抖音账号
+  <a href="https://example.com/notification" target="_blank">关注我的抖音账号</a>
 </button>
 <div class="flex justify-center space-x-4 mt-4">
   <div class="w-8 h-8 flex items-center justify-center">

@@ -2,8 +2,8 @@
 $TITLE = 'Stone';
 $NAME = "Stone's Blog"; // 页面标题
 
-$USERNAME = "admin";
-$PASSWORD = "admin";
+$_USERNAME = "admin";
+$_PASSWORD = "admin";
 
 $STYLE = <<<EOF
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -56,9 +56,57 @@ $HEAD = <<<EOF
       .article-list::-webkit-scrollbar {display: none;}
     </style>
 EOF;
+
+$NAVIGATION = <<<EOF
+    <style>
+        /* 导航栏样式 */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        /* 导航链接样式 */
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav li {
+            float: left;
+        }
+
+        nav li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        /* 鼠标悬停效果 */
+        nav li a:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <ul>
+            <li><a href="#">首页</a></li>
+            <li><a href="links.php">友链</a></li>
+            <li><a href="other.php">其它</a></li>
+			<li><a href="login.php">登录</a></li>
+            <li><a href="about.php">关于</a></li>
+        </ul>
+    </nav>
+EOF;
 $SOCIAL = <<<EOF
 <button class="w-full bg-primary text-white py-2 rounded-button mt-4 !rounded-button hover:bg-primary/90 transition-colors">
-  关注我的抖音账号
+  <a href="https://example.com/notification" target="_blank">关注我的抖音账号</a>
 </button>
 <div class="flex justify-center space-x-4 mt-4">
   <div class="w-8 h-8 flex items-center justify-center">
@@ -230,6 +278,23 @@ $MUSIC = <<<EOF
 </script>
 EOF;
 
+$_path = <<<'EOF'
+<?php
+$currentDir = getcwd();
+# echo "当前工作目录: ". $currentDir. "\n";
+// 切换到上一级目录
+$parentDir = dirname($currentDir);
+if (chdir($parentDir)) {
+    // 获取切换后的工作目录
+    $newDir = getcwd();
+    require_once('config.php');
+    require_once('refresh.php');
+} else {
+    echo "切换目录失败\n";
+}
+?>
+EOF;
+
 $bodydiv=<<<'EOF'
 			        <div class="col-span-4 space-y-6">
 			          <div class="bg-white rounded-lg p-6 shadow-sm">
@@ -260,4 +325,3 @@ $bodydiv=<<<'EOF'
 EOF;
 
 ?>
-

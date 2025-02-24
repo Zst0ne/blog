@@ -10,11 +10,8 @@ require_once('refresh.php');
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $NAME; ?></title>
-	
-
-	
 	<?php echo $HEAD; ?>
-
+	<?php echo $NAVIGATION; ?>
   </head>
   <body class="bg-gray-50">
     <div class="max-w-7xl mx-auto px-4 py-8">
@@ -24,8 +21,8 @@ require_once('refresh.php');
             <div
               id="articleList"
               class="space-y-6 article-list overflow-y-auto"
-              style="max-height: calc(100vh - 2rem);"
-            ></div>
+              style="max-height: calc(100vh - 2rem);" >
+			</div>
           </div>
         </div>
 
