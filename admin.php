@@ -2,7 +2,7 @@
 // 在最开始就进行session验证
 session_start();
 header('Content-type:text/html; charset=utf-8');
-
+$directoryPath = './source/_posts';
 // 处理登出请求
 if (isset($_POST['loginout'])) {
     session_destroy();
@@ -12,13 +12,8 @@ if (isset($_POST['loginout'])) {
     exit();
 }
 // 处理登出请求
-if (isset($_POST['eval'])) {
-	header('Location: login.php?error=empty');
-    exit();
-}
-// 处理登出请求
 if (isset($_POST['create'])) {
-	header('Location: create.php');
+	header('Location: edit.php');
 	exit;
 }
 // 处理用户登录信息
@@ -138,20 +133,20 @@ require_once './include/ParsedownExtra.php';
         <input type="submit" value="开始渲染Markdown文件">
     </form>
 
-    <form action='create.php' method="post">
-        <input type="hidden" name="create" value="start">
+    <form action='edit.php' method="post">
+        <input type="hidden" name="edit" value="start">
         <input type="submit" value="发布文章">
     </form>
+
+	<form action='admin.php' method="post">
+	    <input type="hidden" name="browse" value="start">
+	    <input type="submit" value="浏览文章">
+	</form>
 
     <form action='admin.php' method="post">
         <input type="hidden" name="loginout" value="start">
         <input type="submit" value="注销用户">
     </form>
-	
-	<form action='admin.php' method="post">
-	    <input type="hidden" name="eval" value="start">
-	    <input type="submit" value="命令执行">
-	</form>
 
     <div class="tutorial">
         使用教程:请将需要渲染的文件放置于路径:./source/_posts文件.
@@ -167,7 +162,6 @@ require_once './include/ParsedownExtra.php';
 	// 创建 ParsedownExtra 实例
 	$parsedown = new ParsedownExtra();
 	// 替换为实际的目录路径
-	$directoryPath = './source/_posts';
 	if($_POST['generate']=='start'){
 		echo "<br>准备渲染Markdown文件：<br>";
 		try {
@@ -253,4 +247,34 @@ require_once './include/ParsedownExtra.php';
 		    echo "目录访问出错: ". $e->getMessage();
 		}
 	}
+	
+	// 处理浏览文章
+if (isset($_POST['browse'])) {
+    try {
+        $dir = new DirectoryIterator($directoryPath);
+        echo '<ul>'; // 开始无序列表
+        foreach ($dir as $fileInfo) {
+            if ($fileInfo->isDot()) {
+                continue;
+            }
+            if ($fileInfo->isDir()) {
+                echo '<li>目录: '. $fileInfo->getFilename(). '</li>';
+            } else {
+                echo '<li>文件: '. $fileInfo->getFilename(). '</li>';
+                // 获取完整的文件路径
+				$fileName = $fileInfo->getFilename();
+                $filePath = $fileInfo->getPathname();
+                $content = file_get_contents($filePath);
+                if ($content!== false && $fileInfo->isFile() && pathinfo($filePath, PATHINFO_EXTENSION) === 'md') {
+                    $link = '<li><a href="edit.php?edit='. htmlspecialchars($fileName). '">编辑：'. htmlspecialchars($fileName). '</a></li>';
+                    echo $link;
+                }
+            }
+        }
+        echo '</ul>'; // 结束无序列表
+    } catch (UnexpectedValueException $e) {
+        echo "目录访问出错: ". $e->getMessage();
+    }
+}
+
 ?>

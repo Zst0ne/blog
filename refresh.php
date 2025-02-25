@@ -71,7 +71,8 @@ try {
 				    # echo "未找到 '---' 后面的内容。";
 				}
 				preg_match('/categories:\s*(.*)/', $content, $categoriesMatches);
-				$category=$categoriesMatches[1];
+				$category = $categoriesMatches[1];
+				$category = substr($category, 2);
 				#title
 				$title = isset($titleMatches[1]) ? trim($titleMatches[1]) : '';
 				$title=htmlspecialchars($title);				
