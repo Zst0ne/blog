@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 // 验证用户是否已登录
@@ -34,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['markdown_content'])) 
     } else {
         echo '笔记已保存';
     }
-    exit;
+    exit();
 }
 
 // 读取笔记文件内容
@@ -106,67 +105,40 @@ if (file_exists($noteFilePath)) {
     </style>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
+        let editor;
         document.addEventListener('DOMContentLoaded', function () {
-            const editor = document.getElementById('EditorId');
             const preview = document.getElementById('preview');
             const saveButton = document.getElementById('saveButton');
             const loadButton = document.getElementById('loadButton');
 
-            // 初始化编辑器内容 
-			
-            editor.value = `<?php echo htmlspecialchars($savedContent); ?>`;
-
             // 实时预览 Markdown 内容
             function updatePreview() {
-                const markdown = editor.value;
+                const markdown = editor.getContent();
                 const html = marked.parse(markdown);
                 preview.innerHTML = html;
             }
-			
-			
-			async function sendFetchRequest() {
-				const urlParams = new URLSearchParams(window.location.search);
-				const paramsString = urlParams.toString();
-				
-			    const response = await fetch('edit.php', {
-			    method: 'GET',
-			    headers: {
-			        'Content-Type': 'application/x-www-form-urlencoded'
-			    },
-			    body: paramsString
-			    });
-				// 处理响应
-				if (response.ok) {
-					const data = await response.text();
-					console.log(data);
-				} else {
-					console.error('请求失败:', response.status);
-					}
-				}
-			
-            editor.addEventListener('input', updatePreview);
-            updatePreview();
 
             // 保存笔记
-            saveButton.addEventListener('click', function () {
-                const markdownContent = editor.value;
-                const xhr = new XMLHttpRequest();
-                xhr.open('POST', '', true);
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState === 4 && xhr.status === 200) {
-                        alert(xhr.responseText);
-                    }
-                };
-                xhr.send('markdown_content=' + encodeURIComponent(markdownContent));
+            saveButton.addEventListener('click', async function () {
+                const markdownContent = editor.getContent();
+                const formData = new FormData();
+                formData.append('markdown_content', markdownContent);
+                const response = await fetch('', {
+                    method: 'POST',
+                    body: formData
+                });
+                if (response.ok) {
+                    const data = await response.text();
+                    alert(data);
+                } else {
+                    console.error('请求失败:', response.status);
+                }
             });
-			
-			// 重新加载
-			loadButton.addEventListener('click', function () {
-				editor.value = `<?php echo htmlspecialchars($savedContent); ?>`;
-				console.log(editor.value);
-			});
-			
+
+            // 重新加载
+            loadButton.addEventListener('click', function () {
+                location.reload();
+            });
         });
     </script>
 </head>
@@ -182,12 +154,9 @@ if (file_exists($noteFilePath)) {
     <table>
         <tr>
             <td>
-					<h1>文章编辑页面</h1>
                 <!-- 只保留唯一的 id -->
-                文件名:<input type="text" name="textInput" placeholder="请输入编辑的文章名字">
-                <textarea name="content" id="EditorId" class="common-textarea" cols="30" rows="10">
-                    <?php echo htmlspecialchars($savedContent); ?>
-                </textarea>
+                <h3>文件名:<input type="text" name="FlietextInput" placeholder="请输入文件名"  value="<?php echo htmlspecialchars($_GET['edit']?? '', ENT_QUOTES); ?>">
+                <textarea name="content" id="EditorId" class="common-textarea" cols="30" rows="10"><?php echo htmlspecialchars($savedContent); ?></textarea>
             </td>
         </tr>
         <tr>
@@ -195,26 +164,33 @@ if (file_exists($noteFilePath)) {
             <td></td>
         </tr>
     </table>
-<script type="text/javascript" src="ueditor/ueditor.config.js"></script>
-<script type="text/javascript" src="ueditor/ueditor.all.min.js"></script>
-<script type="text/javascript" src="ueditor/lang/zh-cn/zh-cn.js"></script>
-<script type="text/javascript" charset="utf-8">
-    // 初始化编辑器
-    window.UEDITOR_HOME_URL = "ueditor/"; // 配置路径设定为 UEditor 所放的位置
-    window.onload = function () {
-        /* window.UEDITOR_CONFIG.initialFrameHeight=600; // 编辑器的高度 */
-        /* window.UEDITOR_CONFIG.initialFrameWidth=1200; // 编辑器的宽度 */
-        var editor = new UE.ui.Editor({
-            imageUrl: '',
-            fileUrl: '',
-            imagePath: '',
-            filePath: '',
-            imageManagerUrl: '', // 图片在线管理的处理地址
-            imageManagerPath: ''
-        });
-        editor.render("EditorId"); // 此处的 EditorId 与 <textarea name="content" id="EditorId"> 的 id 值对应
-    }
-</script>
+
+    <script type="text/javascript" src="ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="ueditor/ueditor.all.min.js"></script>
+    <script type="text/javascript" src="ueditor/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        // 初始化编辑器
+        window.UEDITOR_HOME_URL = "ueditor/"; // 配置路径设定为 UEditor 所放的位置
+        window.onload = function () {
+            window.UEDITOR_CONFIG.initialFrameHeight=600; // 编辑器的高度 */
+            window.UEDITOR_CONFIG.initialFrameWidth=1500; // 编辑器的宽度 */
+            editor = new UE.ui.Editor({
+                imageUrl: '',
+                fileUrl: '',
+                imagePath: '',
+                filePath: '',
+                imageManagerUrl: '', // 图片在线管理的处理地址
+                imageManagerPath: ''
+            });
+            editor.render("EditorId"); // 此处的 EditorId 与 <textarea name="content" id="EditorId"> 的 id 值对应
+            editor.addListener('contentChange', function () {
+                const preview = document.getElementById('preview');
+                const markdown = editor.getContent();
+                const html = marked.parse(markdown);
+                preview.innerHTML = html;
+            });
+        }
+    </script>
 </body>
 
 </html>

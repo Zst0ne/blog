@@ -57,6 +57,24 @@ if (chdir($parentDir)) {
       .article-list::-webkit-scrollbar {display: none;}
     </style>
 			    <style>
+        /* 删除之前的通用img旋转样式 */
+        /* 只为头像添加旋转效果 */
+        .avatar-rotate {
+          transition: transform 0.5s ease;
+        }
+        
+        .avatar-rotate:hover {
+          transform: rotate(360deg);
+        }
+
+        /* 其他导航栏样式保持不变 */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+	
+
+	
         /* 导航栏样式 */
         nav {
             background-color: #333;
@@ -94,30 +112,18 @@ if (chdir($parentDir)) {
     <!-- 导航栏 -->
     <nav>
         <ul>
-            <li><a href="#">首页</a></li>
-            <li><a href="links.php">友链</a></li>
-            <li><a href="other.php">其它</a></li>
-			<li><a href="login.php">登录</a></li>
-            <li><a href="about.php">关于</a></li>
+            <li><a href="/index.php">首页</a></li>
+            <li><a href="/links.php">友链</a></li>
+            <li><a href="/other.php">其它</a></li>
+			      <li><a href="/login.php">登录</a></li>
+            <li><a href="/about.php">关于</a></li>
         </ul>
     </nav>
   </head>
 				 <body class="bg-gray-50">
 		<div class="max-w-7xl mx-auto px-4 py-8">
 			 <div class="grid grid-cols-12 gap-8">
-				<div class="col-span-8"><p>title: 【超简单&amp;开源】最新Windows/Office激活方法
-tags:</p>
-<ul>
-<li>白嫖</li>
-<li>网络安全</li>
-<li>Windows
-categories:</li>
-<li>原创文章</li>
-<li>
-<h2>网络安全</h2>
-</li>
-</ul>
-<p>该方法仅支持Windows 8/10/11 Server12以上系统。<BR>
+				<div class="col-span-8"><div class="prose prose-lg max-w-none"><p>该方法仅支持Windows 8/10/11 Server12以上系统。<BR>
 首先Win+S 在搜索框中以管理员权限启动Powershell<BR></p>
 <pre><code>irm https://massgrave.dev/get | iex</code></pre>
 <p>如果在较旧的 Windows 版本上，您可能需要先运行以下命令：</p>
@@ -125,7 +131,18 @@ categories:</li>
 Powershell 方法在 Windows 7 上不起作用。请改用方法 2 - 繁体。
 URL get.activated.win 可能会被某些 DNS 服务阻止，因为它是一个新域。</p>
 <p><img src="../img/KMS.png" alt="KMS" /></p>
-<p>如图 即进入激活工具，按照指示通过数字键选择激活的模块和模式即可。</p>
+<p>如图 即进入激活工具，按照指示通过数字键选择激活的模块和模式即可。</p></div>
+										    <!-- 评论区容器 -->
+    <div id="tcomment"></div>
+
+    <!-- 引入 Twikoo JavaScript -->
+    <script src="https://cdn.staticfile.org/twikoo/1.6.16/twikoo.min.js"></script>
+    <script>
+        twikoo.init({
+            envId: "https://twikoo-git-main-zst0nes-projects.vercel.app", // 替换为你的 Twikoo 环境 ID
+            el: '#tcomment',
+        });
+	</script>
 									          <div class="space-y-6">
 									            <div
 									              id="articleList"
@@ -137,11 +154,10 @@ URL get.activated.win 可能会被某些 DNS 服务阻止，因为它是一个�
 						        <div class="col-span-4 space-y-6">
 			          <div class="bg-white rounded-lg p-6 shadow-sm">
 			            <div class="flex items-center space-x-4">
-			              <img
-			                src="../img/head2.jpg"
-			                class="w-16 h-16 rounded-full object-cover"
-			                alt="avatar"
-			              />
+                      <img
+                        src="../img/head2.jpg"
+                          class="w-16 h-16 rounded-full object-cover avatar-rotate"
+                      alt="avatar"/>
 			              <div>
 			                <h2 class="text-xl font-bold">Stone</h2>
 			                <div class="flex space-x-6 mt-2">

@@ -59,6 +59,24 @@ EOF;
 
 $NAVIGATION = <<<EOF
     <style>
+        /* 删除之前的通用img旋转样式 */
+        /* 只为头像添加旋转效果 */
+        .avatar-rotate {
+          transition: transform 0.5s ease;
+        }
+        
+        .avatar-rotate:hover {
+          transform: rotate(360deg);
+        }
+
+        /* 其他导航栏样式保持不变 */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+	
+
+	
         /* 导航栏样式 */
         nav {
             background-color: #333;
@@ -96,13 +114,26 @@ $NAVIGATION = <<<EOF
     <!-- 导航栏 -->
     <nav>
         <ul>
-            <li><a href="#">首页</a></li>
-            <li><a href="links.php">友链</a></li>
-            <li><a href="other.php">其它</a></li>
-			<li><a href="login.php">登录</a></li>
-            <li><a href="about.php">关于</a></li>
+            <li><a href="/index.php">首页</a></li>
+            <li><a href="/links.php">友链</a></li>
+            <li><a href="/other.php">其它</a></li>
+			      <li><a href="/login.php">登录</a></li>
+            <li><a href="/about.php">关于</a></li>
         </ul>
     </nav>
+EOF;
+$COMMENTS = <<<EOF
+    <!-- 评论区容器 -->
+    <div id="tcomment"></div>
+
+    <!-- 引入 Twikoo JavaScript -->
+    <script src="https://cdn.staticfile.org/twikoo/1.6.16/twikoo.min.js"></script>
+    <script>
+        twikoo.init({
+            envId: "https://twikoo-git-main-zst0nes-projects.vercel.app", // 替换为你的 Twikoo 环境 ID
+            el: '#tcomment',
+        });
+	</script>
 EOF;
 $SOCIAL = <<<EOF
 <button class="w-full bg-primary text-white py-2 rounded-button mt-4 !rounded-button hover:bg-primary/90 transition-colors">
@@ -151,10 +182,6 @@ $WEBINFO = <<<EOF
       </div>
       <div class="webinfo">
         <div class="webinfo-item">
-          <div class="item-name">文章数目 : </div>
-          <div class="item-count">36</div>
-        </div>
-        <div class="webinfo-item">
           <div class="item-name">本站访客数 :</div>
           <div class="item-count" id="busuanzi_value_site_uv"> 1046</div>
         </div>
@@ -164,7 +191,7 @@ $WEBINFO = <<<EOF
         </div>
         <div class="webinfo-item">
           <div class="item-name">最后更新时间 :</div>
-          <div class="item-count" id="last-push-date" data-lastpushdate="2025-02-24T06:02:55.886Z">7 小时前</div>
+          <div class="item-count" id="last-push-date" data-lastpushdate="2025-02-24T06:02:55.886Z"></div>
         </div>
       </div>
     </div>
@@ -328,11 +355,10 @@ $bodydiv=<<<'EOF'
 			        <div class="col-span-4 space-y-6">
 			          <div class="bg-white rounded-lg p-6 shadow-sm">
 			            <div class="flex items-center space-x-4">
-			              <img
-			                src="../img/head2.jpg"
-			                class="w-16 h-16 rounded-full object-cover"
-			                alt="avatar"
-			              />
+                      <img
+                        src="../img/head2.jpg"
+                          class="w-16 h-16 rounded-full object-cover avatar-rotate"
+                      alt="avatar"/>
 			              <div>
 			                <h2 class="text-xl font-bold">Stone</h2>
 			                <div class="flex space-x-6 mt-2">
@@ -351,6 +377,21 @@ $bodydiv=<<<'EOF'
 			                </div>
 			              </div>
 			            </div>
+EOF;
+
+$divtext=<<<EOF
+    <body class="bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-12 gap-8">
+                <div class="col-span-8">
+                    <div class="prose prose-lg max-w-none">
+                        {$markdown}
+                    </div>
+                    {$COMMENTS}
+                    <div class="space-y-6">
+                        <div id="articleList" class="space-y-6 article-list overflow-y-auto" style="max-height: calc(100vh - 2rem);"></div>
+                    </div>
+                </div>
 EOF;
 
 ?>

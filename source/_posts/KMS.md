@@ -1,3 +1,4 @@
+---
 title: 【超简单&开源】最新Windows/Office激活方法
 tags:
   - 白嫖

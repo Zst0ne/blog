@@ -178,12 +178,28 @@ require_once './include/ParsedownExtra.php';
 		            $filePath = $fileInfo->getPathname();
 		            $content = file_get_contents($filePath);
 		            if ($content!== false && $fileInfo->isFile() && pathinfo($filePath, PATHINFO_EXTENSION) === 'md') {
+		                // 移除front-matter部分
+		                if (preg_match('/^---\s*(.*?)\s*---\s*(.*)/s', $content, $matches)) {
+		                    // 标准front-matter格式
+		                    $content = $matches[2];
+		                } else {
+		                    // 替代格式（没有---包围）
+		                    // 移除title、tags和categories部分
+		                    $content = preg_replace('/^title:.*\n/m', '', $content);
+		                    $content = preg_replace('/^tags:.*\n/m', '', $content);
+		                    $content = preg_replace('/^categories:.*\n/m', '', $content);
+		                    // 移除标签和分类的列表项
+		                    $content = preg_replace('/^\s*-\s.*\n/m', '', $content);
+		                    // 清理多余的空行
+		                    $content = preg_replace('/^\s+/', '', $content);
+		                }
 		                $markdown = $parsedown->text($content);
 						$divtext=<<<EOF
 							 <body class="bg-gray-50">
 								<div class="max-w-7xl mx-auto px-4 py-8">
 									 <div class="grid grid-cols-12 gap-8">
-										<div class="col-span-8">{$markdown}
+										<div class="col-span-8"><div class="prose prose-lg max-w-none">{$markdown}</div>
+																{$COMMENTS}
 															          <div class="space-y-6">
 															            <div
 															              id="articleList"
@@ -276,5 +292,4 @@ if (isset($_POST['browse'])) {
         echo "目录访问出错: ". $e->getMessage();
     }
 }
-
 ?>

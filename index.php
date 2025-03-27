@@ -82,7 +82,7 @@ require_once('refresh.php');
                 </div>
             `;
         }
-
+		
 const articleList = document.getElementById("articleList");
 articles.forEach((article) => {
     articleList.innerHTML += createArticleElement(article);

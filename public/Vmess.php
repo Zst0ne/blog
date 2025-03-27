@@ -57,6 +57,24 @@ if (chdir($parentDir)) {
       .article-list::-webkit-scrollbar {display: none;}
     </style>
 			    <style>
+        /* 删除之前的通用img旋转样式 */
+        /* 只为头像添加旋转效果 */
+        .avatar-rotate {
+          transition: transform 0.5s ease;
+        }
+        
+        .avatar-rotate:hover {
+          transform: rotate(360deg);
+        }
+
+        /* 其他导航栏样式保持不变 */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+        }
+	
+
+	
         /* 导航栏样式 */
         nav {
             background-color: #333;
@@ -94,27 +112,18 @@ if (chdir($parentDir)) {
     <!-- 导航栏 -->
     <nav>
         <ul>
-            <li><a href="#">首页</a></li>
-            <li><a href="links.php">友链</a></li>
-            <li><a href="other.php">其它</a></li>
-			<li><a href="login.php">登录</a></li>
-            <li><a href="about.php">关于</a></li>
+            <li><a href="/index.php">首页</a></li>
+            <li><a href="/links.php">友链</a></li>
+            <li><a href="/other.php">其它</a></li>
+			      <li><a href="/login.php">登录</a></li>
+            <li><a href="/about.php">关于</a></li>
         </ul>
     </nav>
   </head>
 				 <body class="bg-gray-50">
 		<div class="max-w-7xl mx-auto px-4 py-8">
 			 <div class="grid grid-cols-12 gap-8">
-				<div class="col-span-8"><p>title: 【装逼向】如何获得朝鲜IP
-tags:</p>
-<ul>
-<li>VPN
-categories:</li>
-<li>原创文章</li>
-<li>
-<h2>网络安全</h2>
-</li>
-</ul>
+				<div class="col-span-8"><div class="prose prose-lg max-w-none"><hr />
 <p><strong>本教程引用了其他大佬的博客教程<a href="https://www.nodeseek.com/post-17017-1">nodeseek</a>侵删</strong>
 首先推荐一个云服务器平台(菠萝云)<a href="https://globalvm.top/">globalvm</a>【非广告】，这个平台自己已经搭建了
 朝鲜和南极洲等地区WARP出口节点，有独立IPv6和共享IPv4，而且一个月只需要5块，<del>算比较贵的了只能玩玩</del>
@@ -185,13 +194,6 @@ categories:</li>
 </tbody>
 </table>
 <h3>总结：</h3>
-<ul>
-<li><strong>VMess</strong>：安全性高，配置复杂，适合技术用户。</li>
-<li><strong>VLESS</strong>：速度快，配置简单，适合新手。</li>
-<li><strong>Trojan</strong>：安全性高，适合需要伪装流量的用户。</li>
-<li><strong>Shadowsocks</strong>：轻量级，适合简单翻墙需求。</li>
-<li><strong>SOCKS5</strong>：基础代理，适合无需高安全性的场景。</li>
-</ul>
 <h3>其他协议：</h3>
 <p>PPTP：适合小型企业。
 L2TP：适用于大型企业。
@@ -243,7 +245,18 @@ systemctl restart x-ui</code></pre>
 朝鲜 VPS 实际位于香港。使用 WARP 获取朝鲜 IPv4。
 给了一个朝鲜的 IPv6，用于入口访问，不能用于出口访问。出口只能使用 WARP 的 IPv4。
 思路猜测：广播了一个注册在朝鲜的 v6 地址给香港母鸡，然后母鸡套WARP（WARP不是根据VPS实际所在地分配IP的），禁止小鸡IPv6出口访问（防止被IP库识别）。这样在外界看不到 IPv6，可以延长 v6 朝鲜位置的存活时间。可以发现 v6 是 PoloCloud 广播的。
-（大概的原理就是通过向IP库网站伪造地址）</code></pre>
+（大概的原理就是通过向IP库网站伪造地址）</code></pre></div>
+										    <!-- 评论区容器 -->
+    <div id="tcomment"></div>
+
+    <!-- 引入 Twikoo JavaScript -->
+    <script src="https://cdn.staticfile.org/twikoo/1.6.16/twikoo.min.js"></script>
+    <script>
+        twikoo.init({
+            envId: "https://twikoo-git-main-zst0nes-projects.vercel.app", // 替换为你的 Twikoo 环境 ID
+            el: '#tcomment',
+        });
+	</script>
 									          <div class="space-y-6">
 									            <div
 									              id="articleList"
@@ -255,11 +268,10 @@ systemctl restart x-ui</code></pre>
 						        <div class="col-span-4 space-y-6">
 			          <div class="bg-white rounded-lg p-6 shadow-sm">
 			            <div class="flex items-center space-x-4">
-			              <img
-			                src="../img/head2.jpg"
-			                class="w-16 h-16 rounded-full object-cover"
-			                alt="avatar"
-			              />
+                      <img
+                        src="../img/head2.jpg"
+                          class="w-16 h-16 rounded-full object-cover avatar-rotate"
+                      alt="avatar"/>
 			              <div>
 			                <h2 class="text-xl font-bold">Stone</h2>
 			                <div class="flex space-x-6 mt-2">
